@@ -13,6 +13,7 @@ import Dashboard from './pages/app/Dashboard';
 import Register from './pages/auth/Register';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import ResetPassword from './pages/auth/ResetPassword';
+import OtpRequest from './pages/auth/OtpRequest';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -31,6 +32,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path='/register' element={<Register />} />
           <Route path='/forget-password' element={<ForgotPassword />} />
           <Route path='/reset-password' element={<ResetPassword />} />
+          <Route path='/otp-verification' element={<OtpRequest />} />
         </Route>
 
         {/* App Layout routes */}
