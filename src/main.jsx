@@ -14,6 +14,7 @@ import Register from './pages/auth/Register';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import ResetPassword from './pages/auth/ResetPassword';
 import OtpRequest from './pages/auth/OtpRequest';
+import Result from './pages/app/Result';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -38,6 +39,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         {/* App Layout routes */}
         <Route element={<AppLayout />}>
           <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/result' element={<Result />} />
         </Route>
 
       </Routes>
