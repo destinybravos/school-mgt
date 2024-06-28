@@ -5,7 +5,7 @@ const Register = () => {
   return (
     <div>
        <section >
-          <div className='bg-[#ebfaff] min-h-[500px] w-[400px] flex flex-col justify-center items-center h-auto px-4 rounded-md'>
+          <div className=' min-h-[500px] max-w-[400px] flex flex-col justify-center items-center h-auto px-4 rounded-md'>
             <h1 className="text-2xl font-sans font-black text-[#334155]">Registration Form</h1>
             <form action="">
                 <div className="py-4">
