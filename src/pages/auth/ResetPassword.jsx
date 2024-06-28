@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from '../../components/utils/Button'
 
 const ResetPassword = () => {
   return (
@@ -16,9 +17,9 @@ const ResetPassword = () => {
        <input className='border-2 border-slate-400 w-full outline-none py-1 pl-1' type="password" name='password' placeholder='Confirm password' />
 
        <div className='text-center mt-7'>
-          <button className='py-2 px-5 bg-primary text-white hover:bg-[#445858]'>
-              Reset Password
-          </button>
+          <Button className=''>
+              Reset password
+          </Button>
        </div>
     </section>
   )
