@@ -21,6 +21,7 @@ const ResetPassword = () => {
               Reset password
           </Button>
        </div>
+
     </section>
   )
 }
