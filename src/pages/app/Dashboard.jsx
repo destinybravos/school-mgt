@@ -6,7 +6,7 @@ import { SiBookstack } from "react-icons/si"
 
 const Dashboard = () => {
   return (
-    <>
+    <> 
       <div className="flex items-start gap-5">
           {/* Dashboard Statistics */}
           <section className='flex-grow'>
