@@ -33,7 +33,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path='/register' element={<Register />} />
           <Route path='/forget-password' element={<ForgotPassword />} />
           <Route path='/reset-password' element={<ResetPassword />} />
-          <Route path='/otp-verification' element={<OtpRequest />} />
+          <Route path='/otp-verification' functionelement={<OtpRequest />} />
         </Route>
 
         {/* App Layout routes */}
