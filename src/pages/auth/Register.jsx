@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 import Button from '../../components/utils/Button'
 
 const Register = () => {
@@ -7,7 +7,7 @@ const Register = () => {
         
 
         <Button className='bg-red-500' title="Hello Button">
-            Login Now
+            Register Now
         </Button>
     </div>
   )
