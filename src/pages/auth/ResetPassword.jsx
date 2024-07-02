@@ -2,7 +2,10 @@
 
 const ResetPassword = () => {
   return (
-    <div>ResetPassword</div>
+    <div>
+
+    
+    </div>
   )
 }
 
