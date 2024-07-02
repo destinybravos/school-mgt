@@ -51,7 +51,7 @@ const Register = () => {
                     required
                 />
             </div>
-            <div className="">
+            <div className="mb-3">
                 <PrimaryTextinput
                     icon={<RiLockPasswordLine className="text-xl" />}
                     placeholder="Enter Password"
@@ -59,7 +59,7 @@ const Register = () => {
                     required
                 />
             </div>
-            <div className=" my-4">
+            <div className="mb-1">
                 <PrimaryTextinput
                     icon={<RiLockPasswordLine className="text-xl" />}
                     placeholder="Confirm Password"
@@ -69,8 +69,8 @@ const Register = () => {
             </div>
             
             <div className="flex gap-1 py-1">
-                <input type="checkbox" name="" id="" className="" required/>
-                <label htmlFor="">I agree to the term of user</label>
+                <input type="checkbox" name="term" id="term" className="" required/>
+                <label htmlFor="term" role='button'>I agree to the term of user</label>
             </div>
                 
             
@@ -81,8 +81,8 @@ const Register = () => {
             <div className=" bg-white py-2 my-4 w-full border border-[#0000002f] h-11 rounded-md">
             <Link to="" className="flex justify-center items-center gap-2 hover:text-blue-800"><FcGoogle className="text-3xl" /> Sign up with Google </Link>
             </div>
-            <div className="mt-10 last:md:mt-14">
-                Already have an account? <Link to="/register" className="text-primary hover:text-blue-800"> Sign in</Link>
+            <div className="mt-10 last:md:mt-5 mb-5">
+                Already have an account? <Link to="/login" className="text-primary hover:text-blue-800"> Sign in</Link>
             </div>
         </form>
     </section>

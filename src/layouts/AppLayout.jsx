@@ -20,15 +20,15 @@ const AppLayout = () => {
     <div className='bg-slate-200 min-h-dvh w-full md:p-1'>
       {/* Header Section */}
       <section className={`bg-white md:my-2 md:mx-4 md:rounded-xl min-h-10 sticky top-0 md:top-4 flex justify-between items-center px-4 shadow-2xl`}>
-          <div className="flex justify-between  md:gap-6 item-center">
+          <div className="flex justify-between  md:gap-6 item-center flex-grow md:flex-grow-0">
               {/* Logo */}
               <div className='flex items-center font-black text-2xl mr-2 md:mr-0'>
                 <Link to="/">School<span className="text-primary">MGT</span></Link>   
               </div>
 
               {/* Search bar */}
-              <div className="flex items-center  bg-slate-50 rounded-md border">
-                  <input type="text" placeholder="Search here...." className={`flex-grow bg-transparent py-1 px-2 outline-none text-sm w-28 md:w-full` } />
+              <div className="flex items-center bg-slate-50 rounded-md border mr-2">
+                  <input type="text" placeholder="Search here...." className={`flex-grow bg-transparent py-1 px-2 outline-none text-sm w-28 md:w-full hidden md:block` } />
                   <button className='px-3 text-slate-500 font-semibold cursor-pointer'>
                     <GoSearch className="hover:text-black" />
                   </button>
@@ -63,18 +63,19 @@ const AppLayout = () => {
               </div>
           </nav>
 
+          <button className="bg-red-600 rounded-full p-1 md:hidden mr-2" onClick={ () => setShowNav((state) => !state) }>
+            <FaUser className="text-2xl"/>
+          </button>
+
           {/* nav Show on small screen */}
-          <button className="md:hidden flex" onClick={ () => setShowNav((state) => !state) }>
-             {showNav? <IoMdClose className='text-3xl cursor-pointer text-red-700 ' /> : <FaBars  className='text-2xl cursor-pointer' /> } 
+          <button className="md:hidden flex" onClick={ () => setOpenMenu((state) => !state) }>
+             {openMenu ? <IoMdClose className='text-3xl cursor-pointer text-red-700 ' /> : <FaBars  className='text-2xl cursor-pointer' /> } 
           </button>
       </section>
 
       <section className='mt-4'>
         {/* Side Bar/Menu */}
-        <button onClick={ () => setOpenMenu((state) => !state) }>
-          <FaBars />
-        </button>
-        <aside className={`fixed w-80 md:left-0 ${openMenu ? 'left-0' : '-left-80' } h-dvh px-4 py-4 transition-all duration-500`}>
+        <aside className={`fixed top-10 md:top-auto w-80 md:left-0 ${openMenu ? 'left-0' : '-left-80' } h-dvh px-4 py-4 transition-all duration-500`}>
           <SideBar />
         </aside>
 
