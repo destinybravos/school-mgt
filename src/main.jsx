@@ -15,6 +15,11 @@ import ForgotPassword from './pages/auth/ForgotPassword';
 import ResetPassword from './pages/auth/ResetPassword';
 import OtpRequest from './pages/auth/OtpRequest';
 import Result from './pages/app/Result';
+import StudentTable from './pages/app/StudentTable';
+// import student_Table from './pages/app/student_Table';
+
+
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -40,8 +45,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route element={<AppLayout />}>
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/result' element={<Result />} />
+          <Route path='/student-Table' element={<StudentTable />} />
         </Route>
-
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

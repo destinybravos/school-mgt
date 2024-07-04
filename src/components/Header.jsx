@@ -7,7 +7,7 @@ const Header = () => {
     const [openNav, setNavState] = useState(false); // Set the initial navigation state to false
 
     return (
-        <div className="bg-secondary min-h-10 px-4 py-3">
+        <div className="bg-secondary min-h-10 px-4 py-3 sticky top-0">
             <section className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between md:items-center">
                 <aside className="font-bold py-2 text-lg flex justify-between items-center">
                     <div>
