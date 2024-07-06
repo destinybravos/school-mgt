@@ -209,7 +209,7 @@ const Result = () => {
                       </tbody>
                     </table>
                   </div>
-              </section>
+            </section>
             </div>
 
 
