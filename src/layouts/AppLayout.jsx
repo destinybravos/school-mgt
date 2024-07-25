@@ -10,11 +10,14 @@ import { IoChatboxOutline } from "react-icons/io5";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { FaUser } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
+import { getActiveUser } from '../helpers/auth';
 
 
 const AppLayout = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const [showNav, setShowNav] = useState (false);
+  let activeUser = getActiveUser();
+  
 
   return (
     <div className='bg-slate-200 min-h-dvh w-full md:p-1'>
@@ -55,10 +58,10 @@ const AppLayout = () => {
                  {/* Profile */}
               <div className="border-l flex px-4 font-sans md:gap-4 gap-1 items-center justify-center flex-col-reverse md:flex-row mt-5 md:mt-0">
                   <Link to="#" className=" whitespace-nowrap ">
-                      <p>Pro City</p>
+                      <p>{ activeUser.firstname }</p>
                   </Link>
-                  <Link to="#" className="bg-red-600 rounded-full p-1">
-                      <FaUser className="text-2xl"/>
+                  <Link to="#" className="bg-red-600 rounded-full p-1 flex justify-center items-center h-10 w-10">
+                      <img src={ activeUser.photo } alt=" " className='object-cover' />
                   </Link>
               </div>
           </nav>
