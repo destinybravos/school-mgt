@@ -13,7 +13,6 @@ try {
         'password' => ['required', 'min:6'],
     ]);
 
-
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
     $email = $_POST['email'];
@@ -24,23 +23,24 @@ try {
     $execQuery = $conn->query($sqlString);
 
     if ($execQuery) {
-        header('HTTP\1 200');
+        header('HTTP/1 200');
         echo json_encode([
             'success' => true,
             'message' => 'User record created successfully'
         ]);
     }else{
-        header('HTTP\1 500');
+        header('HTTP/1 500');
         echo json_encode([
             'success' => false,
-            'message' => 'An unxpected server sql error occured.'
+            'message' => 'An unxpected server sql error occured.',
+            'error' => $conn->error
         ]);
     }
     
 } catch (\Throwable $thrownError) {
-    header('HTTP\1 ' . $thrownError->getCode());
+    header('HTTP/1 ' . $thrownError->getCode());
     echo json_encode([
         'success' => false,
-        'message' => $thrownError->getMessage()
+        'message' => $thrownError->getMessage(),
     ]);
 }
