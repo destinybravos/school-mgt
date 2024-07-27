@@ -4,7 +4,7 @@ const PrimaryTextinput = ({icon = '', extraElement = '', className = '', ...prop
   return (
     <div className="flex items-center max-w-full bg-slate-50 rounded-md border">
         { extraElement }
-        <input type="text" className={`flex-grow bg-transparent py-2 px-3 focus:outline-none focus:border-none focus:ring-0 active:border-none active:ring-0` + className} {...props} />
+        <input type="text" className={`flex-grow bg-transparent py-1 px-3 focus:outline-none focus:border-none focus:ring-0 active:border-none active:ring-0` + className} {...props} />
         <button className='px-3 text-slate-500 font-semibold'>
             {icon}
         </button>
