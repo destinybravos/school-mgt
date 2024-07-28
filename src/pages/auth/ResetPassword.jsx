@@ -4,7 +4,7 @@ import Button from '../../components/utils/Button'
 const ResetPassword = () => {
   return (
     <section className='px-3'>
-       <div className='mb-6'>
+       <div className='mb-6 sm:w-full'>
           <h1 className='text-3xl font-semibold mb-5'>
                 Reset account password
           </h1>
@@ -21,6 +21,7 @@ const ResetPassword = () => {
               Reset password
           </Button>
        </div>
+
     </section>
   )
 }

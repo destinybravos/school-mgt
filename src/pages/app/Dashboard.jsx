@@ -1,10 +1,34 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect } from 'react'
 import { FaUser } from "react-icons/fa"
 import { FaChevronRight } from 'react-icons/fa6'
 import { PiUserSquareFill } from "react-icons/pi"
 import { SiBookstack } from "react-icons/si"
+import { getToken } from '../../helpers/auth'
+import { useNavigate } from 'react-router-dom'
 
 const Dashboard = () => {
+  let navigator = useNavigate();
+  let fetchStatistics = () => {
+    axios.get(`http://localhost/school-mgt/api/dashboard/stats.php`, {
+      headers: {
+        'Authorization': 'Bearer ' + getToken()
+      }
+    })
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch((error) => {
+        if (error.response?.statusCode == 401) {
+          navigator('/login')
+        }
+    })
+  }
+
+  useEffect(()=>{
+    fetchStatistics();
+  }, [])
+
   return (
     <> 
       <div className="flex items-start gap-5 flex-col lg:flex-row">

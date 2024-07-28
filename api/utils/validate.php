@@ -52,8 +52,33 @@
                         throw new Exception($field . " must be an email", 422);
                     }
                 }
+
+                // Checking for unique fields
+                if (str_contains($constraintName, 'unique')) {
+                    $table = explode(':', $constraintName)[0];
+                    if (isExists($table, $field, $data[$field])) {
+                        throw new Exception("The email '$data[$field]' is already in use by another user.", 422);
+                    }
+                }
+
+                // Checking for min
+                if (str_contains($constraintName, 'min')) {
+                    $min = (int)explode(':', $constraintName)[1];
+                    if ($min > strlen($data[$field])) {
+                        throw new Exception("$field must be a minimum of $min characters", 422);
+                    }
+                }
+
             }
         }
 
         return true;
+    }
+
+    function isExists($table, $field, $value) : bool {
+        $conn = new MySQLi("localhost", "root", "", "school_mgt");
+        $sqlString  = "SELECT * FROM $table WHERE $field='$value'";
+        $execQuery = $conn->query($sqlString);
+
+        return $execQuery->num_rows > 0;
     }
