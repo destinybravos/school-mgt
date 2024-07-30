@@ -46,7 +46,8 @@ try {
 
 
 function generateAccessToken($email){
-    return base64_encode($email);
+    include_once "../utils/AuthToken.php";
+    return saveAccessToken($email);
 }
 
 //  Function to generate a random string for token payload

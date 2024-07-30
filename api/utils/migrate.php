@@ -52,15 +52,15 @@ try {
 
     $conn->query($sqlUsers);
 
-    // // create Personal Access Token table structure if not exist
-    // $sqlAccessToken = "CREATE TABLE IF NOT EXISTS access_tokens (
-    //     email VARCHAR(255) NOT NULL,
-    //     token VARCHAR(255) NOT NULL,
-    //     created_at DATETIME DEFAULT(CURRENT_TIMESTAMP),
-    //     expires_at DATETIME
-    // )";
+    // create Personal Access Token table structure if not exist
+    $sqlAccessToken = "CREATE TABLE IF NOT EXISTS access_tokens (
+        email VARCHAR(255) NOT NULL,
+        token VARCHAR(255) NOT NULL,
+        created_at DATETIME DEFAULT(CURRENT_TIMESTAMP),
+        expires_at DATETIME
+    )";
 
-    // $conn->query($sqlAccessToken);
+    $conn->query($sqlAccessToken);
 
     // Return success
     header("HTTP/1 200");
