@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FaBars } from 'react-icons/fa6'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import SideBar from '../components/SideBar';
 // import PrimaryTextinput from '../components/utils/PrimaryTextinput';
 import { Link } from 'react-router-dom';
@@ -8,16 +8,41 @@ import { GoSearch } from "react-icons/go";
 import { BsTelephone } from "react-icons/bs";
 import { IoChatboxOutline } from "react-icons/io5";
 import { IoIosNotificationsOutline } from "react-icons/io";
-import { FaUser } from "react-icons/fa";
+import { FaSignOutAlt, FaUser } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
-import { getActiveUser } from '../helpers/auth';
+import { getActiveUser, getToken, terminateSession } from '../helpers/auth';
+import axios from 'axios';
 
 
 const AppLayout = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const [showNav, setShowNav] = useState (false);
+  const [showProfileMenu, setShowProfileMenu] = useState(false)
   let activeUser = getActiveUser();
+  let navigator = useNavigate();
+
+  useEffect(()=> {
+    if (activeUser == null) {
+      navigator('/login');
+    }
+  }, [])
   
+  let signOut = () => {
+    axios.get(`http://localhost/school-mgt/api/auth/logout.php`, {
+      headers: {
+        'Authorization': 'Bearer ' + getToken()
+      }
+    })
+    .then((response) => {
+      if (response.data.success == true) {
+        terminateSession();
+        navigator('/')
+      }
+    })
+    .catch((error) => {
+      alert(error.response.data.message)
+    })
+  }
 
   return (
     <div className='bg-slate-200 min-h-dvh w-full md:p-1'>
@@ -56,14 +81,22 @@ const AppLayout = () => {
                   </div>
               </div>
                  {/* Profile */}
-              <div className="border-l flex px-4 font-sans md:gap-4 gap-1 items-center justify-center flex-col-reverse md:flex-row mt-5 md:mt-0">
-                  <Link to="#" className=" whitespace-nowrap ">
-                      <p>{ activeUser.firstname }</p>
-                  </Link>
-                  <Link to="#" className="bg-red-600 rounded-full p-1 flex justify-center items-center h-10 w-10">
-                      <img src={ activeUser.photo } alt=" " className='object-cover' />
-                  </Link>
-              </div>
+              {activeUser && <div className="relative">
+                  <section role='button' onClick={() => setShowProfileMenu((prev) => !prev)} className="border-l flex px-4 font-sans md:gap-4 gap-1 items-center justify-center flex-col-reverse md:flex-row mt-5 md:mt-0">
+                    <Link to="#" className=" whitespace-nowrap ">
+                        <p>{ activeUser.firstname }</p>
+                    </Link>
+                    <Link to="#" className="bg-red-600 rounded-full p-1 flex justify-center items-center h-10 w-10">
+                        <img src={ activeUser.photo } alt=" " className='object-cover' />
+                    </Link>
+                  </section>
+
+                  {showProfileMenu && <div className='absolute bg-white top-[120%] right-0 w-full border shadow-md'>
+                    <button onClick={() => signOut()} className='flex gap-2 items-center  px-3 py-2'>
+                      <FaSignOutAlt /> Logout
+                    </button>
+                  </div>}
+              </div>}
           </nav>
 
           <button className="bg-red-600 rounded-full p-1 md:hidden mr-2" onClick={ () => setShowNav((state) => !state) }>

@@ -18,3 +18,8 @@ export function getActiveUser() {
     return JSON.parse(localStorage.getItem('active_user'));
 }
 
+export function terminateSession(){
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('active_user');
+}
+

@@ -3,10 +3,19 @@ import { Outlet } from 'react-router-dom';
 import { PiBookOpenTextThin } from "react-icons/pi"
 import { PiArrowFatRightFill } from "react-icons/pi";
 import StudentImage from "../assets/images/st3.png"
-
-import { Link } from'react-router-dom';
+import { Link, useNavigate } from'react-router-dom';
+import { getActiveUser } from '../helpers/auth';
+import { useEffect } from 'react';
 
 const AuthLayout = () => {
+  let activeUser = getActiveUser();
+  let navigator = useNavigate();
+  useEffect(()=> {
+    if (activeUser !== null) {
+      navigator('/dashboard');
+    }
+  }, [])
+
   return (
     <div className='flex justify-between'>
       <aside className='bg-primary min-h-dvh flex-grow w-1/2 hidden md:block  '>
