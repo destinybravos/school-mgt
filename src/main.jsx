@@ -15,11 +15,15 @@ import ForgotPassword from './pages/auth/ForgotPassword';
 import ResetPassword from './pages/auth/ResetPassword';
 import OtpRequest from './pages/auth/OtpRequest';
 import Result from './pages/app/Result';
+<<<<<<< HEAD
+import Attendance from './pages/app/Attendance';
+=======
 import StudentTable from './pages/app/StudentTable';
 // import student_Table from './pages/app/student_Table';
 
 
 
+>>>>>>> 246b9893c2a72f1baaa4e838a4f26e09640b080d
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -45,7 +49,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route element={<AppLayout />}>
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/result' element={<Result />} />
+<<<<<<< HEAD
+          <Route path='/attendance' element={<Attendance />} />
+=======
           <Route path='/student-Table' element={<StudentTable />} />
+>>>>>>> 246b9893c2a72f1baaa4e838a4f26e09640b080d
         </Route>
       </Routes>
     </BrowserRouter>
