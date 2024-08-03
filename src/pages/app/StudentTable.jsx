@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const StudentTable = () => {
   return (
     <>
-        <section className='w-100% lg:m-4 m-1 '>
+        <section className='w-100%  m-1 '>
               <div className='flex  items-start md:flex-row bg-[#f8f8f8] p-4 rounded-md  md:justify-end  justify-center md:items-center gap-4 whitespace-nowrap  '>
                   <aside className='flex flex-row gap-2 shadow-2xl '>
                     <Button className="outline-none text-black  hover:text-white hover:bg-primary bg-slate-200 rounded-md ">PRINT</Button>
@@ -24,10 +24,10 @@ const StudentTable = () => {
                   </aside>
               </div>
           
-              <div className='md:grid md:grid-cols-5  gap-4 md:gap-20 flex flex-col items-center justify-center  md:items-center  bg-[#f8f8f8] p-4 rounded-md    mt-2'>
-                  <div className="md:col-span-2  md:w-full">
+              <div className='grid md:grid-cols-5 grid-cols-1 gap-4 md:gap-20 w-full items-center justify-center  md:items-center  bg-[#f8f8f8] p-4 rounded-md    mt-2'>
+                  <div className="md:col-span-2 col-span-2  md:w-full">
                     <PrimaryTextinput
-                      icon={<CiSearch className="text-lg hover:text-primary" />} 
+                      icon={<CiSearch className="text-lg hover:text-primary " />} 
                       placeholder="Search here...." 
                       type="text" 
                       className="h-96 w-72"
