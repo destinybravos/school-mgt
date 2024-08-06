@@ -5,7 +5,7 @@ import { FaChevronRight } from 'react-icons/fa6'
 import { PiUserSquareFill } from "react-icons/pi"
 import { SiBookstack } from "react-icons/si"
 import { getToken } from '../../helpers/auth'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Dashboard = () => {
   const [statistics, setStatistics] = useState(null)
@@ -68,15 +68,15 @@ const Dashboard = () => {
           </section>
 
           {/* Right Side */}
-          <section className='w-full lg:w-1/4 bg-lime-700'>
-            <aside className="min-h-32 rounded-xl py-2 px-3 bg-slate-300" > 
+          <section className='w-full lg:w-1/4'>
+            <Link to="/department" className="min-h-32 rounded-xl py-2 px-3 bg-slate-300 block" > 
               <p className='text-slate-600'> Departments </p>
               <div className='flex items-center text-2xl font-bold mt-4 gap-2'>
               <SiBookstack /> Over { statistics?.no_depts }
               </div>
               <p className='text-slate-700 font-light text-sm'> 120 lecture Buildings</p>
               <h3 className='text-slate-700 font-semibold text-xs mt-4 flex items-center gap-2'> <span>Check Syllables</span> <FaChevronRight /> </h3>
-            </aside>
+            </Link>
           </section>
       </div>}
     </>

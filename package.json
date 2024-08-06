@@ -2,7 +2,7 @@
   "name": "school-mgt",
   "private": true,
   "version": "0.0.0",
-  "homepage": "http://localhost/schoolmgt/",
+  "homepage": "http://127.0.0.1/schoolmgt/",
   "type": "module",
   "scripts": {
     "dev": "vite",

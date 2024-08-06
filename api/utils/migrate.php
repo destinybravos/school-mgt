@@ -66,12 +66,13 @@ try {
     header("HTTP/1 200");
     echo json_encode([
         'success' => true,
-        'message' => 'Databse and all table structures created successfuly'
+        'message' => 'Database and all table structures created successfuly'
     ]);
 } catch (\Throwable $th) {
     header("HTTP/1 500");
     echo json_encode([
         'success' => false,
-        'message' => $th->getMessage()
+        'message' => $th->getMessage(),
+        'trace' => $th->getTrace()
     ]);
 }

@@ -17,6 +17,7 @@ import OtpRequest from './pages/auth/OtpRequest';
 import Result from './pages/app/Result';
 import Attendance from './pages/app/Attendance';
 import StudentTable from './pages/app/StudentTable';
+import Departments from './pages/app/Departments';
 // import student_Table from './pages/app/student_Table';
 
 
@@ -47,7 +48,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/result' element={<Result />} />
           <Route path='/attendance' element={<Attendance />} />
-          <Route path='/student-Table' element={<StudentTable />} />
+          <Route path='/students' element={<StudentTable />} />
+          <Route path='/department' element={<Departments />} />
         </Route>
       </Routes>
     </BrowserRouter>
