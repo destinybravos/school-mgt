@@ -30,6 +30,19 @@ try {
         FOREIGN KEY (school_id) REFERENCES schools(id)
     )";
     $conn->query($sqlDepartments);
+
+
+
+// create courses table structure if not exist
+    $sqlCourses= "CREATE TABLE IF NOT EXISTS courses(
+         id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        description VARCHAR(6000),
+        department_id INT NOT NULL,
+        FOREIGN KEY (department_id) REFERENCES departments(id)
+    
+    )";
+    $conn->query($sqlCourses);
     
     // create users table structure if not exist
     $sqlUsers = "CREATE TABLE IF NOT EXISTS users (

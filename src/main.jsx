@@ -18,6 +18,7 @@ import Result from './pages/app/Result';
 import Attendance from './pages/app/Attendance';
 import StudentTable from './pages/app/StudentTable';
 import Departments from './pages/app/Departments';
+import Courses from './pages/app/Courses';
 // import student_Table from './pages/app/student_Table';
 
 
@@ -50,6 +51,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path='/attendance' element={<Attendance />} />
           <Route path='/students' element={<StudentTable />} />
           <Route path='/department' element={<Departments />} />
+          <Route path='/courses' element={<Courses />} />
         </Route>
       </Routes>
     </BrowserRouter>

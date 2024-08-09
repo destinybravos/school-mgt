@@ -10,6 +10,7 @@ import { PiExamLight } from "react-icons/pi";
 import { PiCertificateFill } from "react-icons/pi";
 import { IoSettingsOutline } from "react-icons/io5";
 import { RiSchoolLine } from 'react-icons/ri';
+import { GiBookCover } from 'react-icons/gi';
 
 const SideBar = () => {
   return (
@@ -48,13 +49,13 @@ const SideBar = () => {
                 </div>
            </Link>
            {/* Fourth section */}
-           <Link to="" className='flex gap-10 items-center mb-3 hover:border-b-2 border-primary hover:pb-2 transition-all duration-200'>
+           <Link to="/Courses" className='flex gap-10 items-center mb-3 hover:border-b-2 border-primary hover:pb-2 transition-all duration-200'>
                 <div>
-                    <CgMediaLive className='text-2xl' />
+                    <GiBookCover className='text-2xl' />
                 </div>
                 <div>
                   <h1 className='text-lg font-medium'>
-                      Live Class
+                      Courses
                   </h1>
                 </div>
            </Link>
@@ -93,7 +94,7 @@ const SideBar = () => {
            </Link>
 
            {/* 8th */}
-           <Link to="" className='flex gap-10 items-center mb-3 hover:border-b-2 border-primary hover:pb-2 transition-all duration-200'>
+           <Link to="/Result" className='flex gap-10 items-center mb-3 hover:border-b-2 border-primary hover:pb-2 transition-all duration-200'>
                 <div>
                     <PiExamLight className='text-2xl' />
                 </div>
