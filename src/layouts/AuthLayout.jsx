@@ -18,7 +18,7 @@ const AuthLayout = () => {
 
   return (
     <div className='flex justify-between'>
-      <aside className='bg-primary min-h-dvh flex-grow w-1/2 hidden md:block  '>
+      <aside className='bg-primary min-h-dvh flex-grow w-1/2 hidden md:block relative'>
           <div className="text-4xl text-white flex justify-center pt-3 pb-3 mt-14 ">
             <div className="py-2 px-2 rounded-full border border-white">
               <Link to="/" className="" > <PiBookOpenTextThin /></Link>
@@ -27,11 +27,11 @@ const AuthLayout = () => {
           <div className='flex justify-center items-center flex-col  '>
               <h1 className='text-2xl md:text-4xl font-black text-white '>Welcome Home</h1>
               <h6 className='text-sm text-white'>Manage your data here as Our Student</h6>
-              <div className='flex items-center'>
+              <div className='flex items-center '>
                 <div className=''>
                     <img src={StudentImage} alt="" className=' h-[450px]' />
                 </div>
-                <div className='absolute left-[580px]'>
+                <div className='absolute right-0'>
                     <PiArrowFatRightFill   className='text-[100px] cursor-pointer text-white hover:-rotate-45 hover:text-secondary  duration-1000'/>
                 </div>
               </div>   

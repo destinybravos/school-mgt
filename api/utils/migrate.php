@@ -22,7 +22,7 @@ try {
     )";
     $conn->query($sqlSchools);
 
-    $sqlDepartments= "CREATE TABLE IF NOT EXISTS departments (
+    $sqlDepartments = "CREATE TABLE IF NOT EXISTS departments (
         id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
         description VARCHAR(6000),
@@ -30,7 +30,7 @@ try {
         FOREIGN KEY (school_id) REFERENCES schools(id)
     )";
     $conn->query($sqlDepartments);
-    
+
     // create users table structure if not exist
     $sqlUsers = "CREATE TABLE IF NOT EXISTS users (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -51,6 +51,26 @@ try {
     )";
 
     $conn->query($sqlUsers);
+
+    // create students table structure if not exist
+    $sqlStd = "CREATE TABLE IF NOT EXISTS students (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        regno VARCHAR(20) NOT NULL,
+        firstname VARCHAR(255) NOT NULL,
+        lastname VARCHAR(255) NOT NULL,
+        email VARCHAR(255) NOT NULL,
+        email_verified_at DATETIME NULL,
+        phone VARCHAR(255),
+        password VARCHAR(255) NOT NULL,
+        photo VARCHAR(255) DEFAULT('$baseUrl/assets/images/users/std.png'),
+        gender VARCHAR(100),
+        department_id INT NOT NULL,
+        FOREIGN KEY (department_id) REFERENCES departments(id),
+        created_at DATETIME DEFAULT(CURRENT_TIMESTAMP),
+        updated_at DATETIME DEFAULT(CURRENT_TIMESTAMP)
+    )";
+
+    $conn->query($sqlStd);
 
     // create Personal Access Token table structure if not exist
     $sqlAccessToken = "CREATE TABLE IF NOT EXISTS access_tokens (
