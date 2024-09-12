@@ -1,5 +1,5 @@
 
-const Button = ({className = '', props, disabled = false, children, onClick = (e) => {} }) => {
+const Button = ({className = '', disabled = false, children, ...props }) => {
     return (
         <button
             {...props}
