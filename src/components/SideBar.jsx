@@ -59,40 +59,6 @@ const SideBar = () => {
                   </h1>
                 </div>
            </Link>
-            {/* Fifty section */}
-            <Link to="" className='flex gap-10 items-center mb-3 hover:border-b-2 border-primary hover:pb-2 transition-all duration-200'>
-                <div>
-                    <MdOutlineAssignment className='text-2xl' />
-                </div>
-                <div>
-                  <h1 className='text-lg font-medium'>
-                      Assignment
-                  </h1>
-                </div>
-           </Link>
-            {/* sixt section */}
-            <Link to="" className='flex gap-10 items-center mb-3 hover:border-b-2 border-primary hover:pb-2 transition-all duration-200'>
-                <div>
-                    <FaPeopleGroup className='text-2xl' />
-                </div>
-                <div>
-                  <h1 className='text-lg font-medium'>
-                      Classmates
-                  </h1>
-                </div>
-           </Link>
-           {/* seventh section */}
-           <Link to="" className='flex gap-10 items-center mb-3 hover:border-b-2 border-primary hover:pb-2 transition-all duration-200'>
-                <div>
-                    <PiExamLight className='text-2xl' />
-                </div>
-                <div>
-                  <h1 className='text-lg font-medium'>
-                      Exams
-                  </h1>
-                </div>
-           </Link>
-
            {/* 8th */}
            <Link to="/Result" className='flex gap-10 items-center mb-3 hover:border-b-2 border-primary hover:pb-2 transition-all duration-200'>
                 <div>
@@ -104,19 +70,8 @@ const SideBar = () => {
                   </h1>
                 </div>
            </Link>
-            {/* eight section */}
-            <Link to="" className='flex gap-10 items-center mb-3 hover:border-b-2 border-primary hover:pb-2 transition-all duration-200'>
-                <div>
-                    <PiCertificateFill className='text-2xl' />
-                </div>
-                <div>
-                  <h1 className='text-lg font-medium'>
-                    My Certificate
-                  </h1>
-                </div>
-           </Link>
            {/* 9th section */}
-           <Link to="" className='flex gap-10 items-center mb-3 hover:border-b-2 border-primary hover:pb-2 transition-all duration-200'>
+           <Link to="#" className='flex gap-10 items-center mb-3 hover:border-b-2 border-primary hover:pb-2 transition-all duration-200'>
                 <div>
                     <IoSettingsOutline className='text-2xl' />
                 </div>

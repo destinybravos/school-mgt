@@ -13,7 +13,7 @@ export default function Footer() {
                         <ul className='space-y-3'>
                             <li><a href="#">Get in Touch</a></li>
                             <li><a href="#">Questions or feedback</a></li>
-                            <li><a href="#">waiting to hear from you</a></li>
+                            <li><a href="#">Waiting to hear from you</a></li>
                         </ul>
                         <div className='text-white flex gap-3 font-bold mt-6'>
                             <FaFacebook/>
@@ -25,7 +25,7 @@ export default function Footer() {
                     
                     <aside >
                         <h1 className="text-2xl mb-5 text-white">
-                            products
+                            Products
                         </h1>
                         <ul className='space-y-3'>
                             <li><a href="#">student screen</a></li>

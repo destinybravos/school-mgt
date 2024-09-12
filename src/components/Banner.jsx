@@ -1,5 +1,6 @@
 import { FaSignInAlt } from 'react-icons/fa'
 import bannerImage from '../assets/images/banner_img2.jpg'
+import { Link } from 'react-router-dom'
 
 const Banner = () => {
   return (
@@ -16,9 +17,9 @@ const Banner = () => {
                         perspiciatis beatae, labore animi accusamus provident nobis.
                     </p>
 
-                    <button className='py-1 px-3 bg-primary text-white rounded-lg flex items-center gap-1 mx-auto md:mx-0'>
+                    <Link to={'/login'} className='py-2 px-4 bg-primary text-white rounded-lg inline-flex items-center gap-1 mx-auto md:mx-0'>
                         <FaSignInAlt />  Login
-                    </button>
+                    </Link>
                 </div>
             </aside>
 

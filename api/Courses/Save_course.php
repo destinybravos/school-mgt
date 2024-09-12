@@ -7,27 +7,30 @@ try {
 
     include_once "../utils/validate.php";
 
-    // validateInputsAdvanced($_POST, [
-    //     'school_id' => ['required'],
-    //     'department' => ['required']
-    // ]);
+    validateInputsAdvanced($_POST, [
+        'course' => ['required'],
+        'department_id' => ['required']
+    ]);
 
     $department_id = $_POST['department_id'];
     $course = $_POST['course'];
+    $course_code = $_POST['course_code'];
+    $credit_unit = $_POST['credit_unit'];
+    $credit_hour = $_POST['credit_hour'];
     $description = $_POST['description'];
 
     // Check if the course exists
-    $checkCourseSql = $conn->query("SELECT * FROM Courses WHERE name='$course'");
+    $checkCourseSql = $conn->query("SELECT * FROM Courses WHERE title='$course'");
 
     if ($checkCourseSql->num_rows > 0) {
         header('HTTP/1.1 403');
         echo json_encode([
             'success' => false,
             'body' => [],
-            'message' => 'Course already in the our records. '
+            'message' => 'Course already in the our records.'
         ]);
     } else {
-        $sqlQuery = $conn->query("INSERT INTO Courses (name, department_id, description) VALUES('$course', '$department_id', '$description')");
+        $sqlQuery = $conn->query("INSERT INTO Courses(title, department_id, description, code, credit_unit, credit_hour) VALUES('$course', '$department_id', '$description', '$course_code', '$credit_unit', '$credit_hour')");
         if ($sqlQuery) {
             header('HTTP/1.1 200');
             echo json_encode([
@@ -43,7 +46,6 @@ try {
                 'message' => 'An unexpected error occured'
             ]);
         }
-        
     }
 
 } catch (Throwable $thrownError) {
@@ -51,6 +53,7 @@ try {
     echo json_encode([
         'success' => false,
         'message' => $thrownError->getMessage(),
+        'trace' => $thrownError->getTrace()
     ]);
 }
 

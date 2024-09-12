@@ -35,8 +35,11 @@ try {
 
 // create courses table structure if not exist
     $sqlCourses= "CREATE TABLE IF NOT EXISTS courses(
-         id INT AUTO_INCREMENT PRIMARY KEY,
-        name VARCHAR(255) NOT NULL,
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        title VARCHAR(255) NOT NULL,
+        code VARCHAR(255) NOT NULL,
+        credit_unit INT NOT NULL,
+        credit_hour INT NOT NULL,
         description VARCHAR(6000),
         department_id INT NOT NULL,
         FOREIGN KEY (department_id) REFERENCES departments(id)

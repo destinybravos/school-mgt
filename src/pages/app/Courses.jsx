@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Button from '../../components/utils/Button'
 import Modal from '../../components/utils/Modal'
 import { FaRegTimesCircle } from 'react-icons/fa'
-import { FaPlus, FaSchool } from 'react-icons/fa6'
+import { FaIcons, FaPlus, FaSchool, FaStopwatch, FaStopwatch20 } from 'react-icons/fa6'
 import PrimaryTextinput from '../../components/utils/PrimaryTextinput'
 import SelectInput from '../../components/utils/SelectInput'
 import TextArea from '../../components/utils/TextArea'
@@ -70,6 +70,7 @@ const Courses = () => {
                 ev.target.reset();
                 setDeptModalState(false);
                 fetchDeptData();
+                fetchCourse()
                 alert(response.data.message)
             }
         })
@@ -106,6 +107,8 @@ const Courses = () => {
                         <tr className='text-xs font-light  px-11 '>
                             <th className='py-3 whitespace-nowrap '>SN</th>
                             <th className='whitespace-nowrap'>COURSE</th>
+                            <th className='whitespace-nowrap'>CODE</th>
+                            <th className='whitespace-nowrap'>UNIT</th>
                             <th className='whitespace-nowrap'>DEPARTMENT</th>
                         </tr>
                     </thead>
@@ -114,7 +117,9 @@ const Courses = () => {
                         {courses.length > 0 && courses.map((course, index) => (
                             <tr className='text-sm' key={course.id}>
                                 <td className='py-3 whitespace-nowrap'> {index + 1} </td>
-                                <td>{ course.name }</td>
+                                <td>{ course.title }</td>
+                                <td>{ course.code }</td>
+                                <td>{ course.credit_unit }</td>
                                 <td className="whitespace-nowrap">{ course.department?.name }</td>
                             </tr>
                         ))}
@@ -152,9 +157,39 @@ const Courses = () => {
                                 <div className="mb-3">
                                     <PrimaryTextinput
                                         icon={<GiWhiteBook className="text-xl"/>}
-                                        placeholder="Enter Course Name"
+                                        placeholder="Enter Course Title"
                                         type ="text"
                                         name="course"
+                                        className='py-2'
+                                        required
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <PrimaryTextinput
+                                        icon={<FaIcons className="text-xl"/>}
+                                        placeholder="Enter Course Code"
+                                        type ="text"
+                                        name="course_code"
+                                        className='py-2'
+                                        required
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <PrimaryTextinput
+                                        icon={<FaStopwatch20 className="text-xl"/>}
+                                        placeholder="Enter Credit Unit"
+                                        type ="number"
+                                        name="credit_unit"
+                                        className='py-2'
+                                        required
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <PrimaryTextinput
+                                        icon={<FaStopwatch className="text-xl"/>}
+                                        placeholder="Enter Credit Hour"
+                                        type ="number"
+                                        name="credit_hour"
                                         className='py-2'
                                         required
                                     />
@@ -166,7 +201,7 @@ const Courses = () => {
                                         placeholder="Description"
                                         type ="text"
                                         name="description"
-                                        className='py-2 w-full px-4'
+                                        className='py-3 w-full px-4 resize-none h-32'
                                     />
                                 </div>
                                 
