@@ -59,8 +59,8 @@ const SideBar = () => {
                   </h1>
                 </div>
            </Link>
-           {/* 8th */}
-           <Link to="/Result" className='flex gap-10 items-center mb-3 hover:border-b-2 border-primary hover:pb-2 transition-all duration-200'>
+           
+           {/* <Link to="/Result" className='flex gap-10 items-center mb-3 hover:border-b-2 border-primary hover:pb-2 transition-all duration-200'>
                 <div>
                     <PiExamLight className='text-2xl' />
                 </div>
@@ -70,7 +70,6 @@ const SideBar = () => {
                   </h1>
                 </div>
            </Link>
-           {/* 9th section */}
            <Link to="#" className='flex gap-10 items-center mb-3 hover:border-b-2 border-primary hover:pb-2 transition-all duration-200'>
                 <div>
                     <IoSettingsOutline className='text-2xl' />
@@ -80,7 +79,7 @@ const SideBar = () => {
                       Settings
                   </h1>
                 </div>
-           </Link>
+           </Link> */}
         </div> 
     </div>
   )
