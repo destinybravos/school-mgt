@@ -72,6 +72,25 @@ try {
 
     $conn->query($sqlStd);
 
+    // create Staff table structure if not exist
+    $sqlStaff = "CREATE TABLE IF NOT EXISTS staff (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        firstname VARCHAR(255) NOT NULL,
+        lastname VARCHAR(255) NOT NULL,
+        email VARCHAR(255) NOT NULL,
+        email_verified_at DATETIME NULL,
+        homeAddress VARCHAR(20) NOT NULL,
+        phone VARCHAR(255),
+        photo VARCHAR(255) DEFAULT('$baseUrl/assets/images/users/staff.png'),
+        gender VARCHAR(100),
+        department_id INT NOT NULL,
+        FOREIGN KEY (department_id) REFERENCES departments(id),
+        created_at DATETIME DEFAULT(CURRENT_TIMESTAMP),
+        updated_at DATETIME DEFAULT(CURRENT_TIMESTAMP)
+    )";
+
+    $conn->query($sqlStaff);
+
     // create Personal Access Token table structure if not exist
     $sqlAccessToken = "CREATE TABLE IF NOT EXISTS access_tokens (
         email VARCHAR(255) NOT NULL,

@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Modal from './../../components/utils/Modal';
 // import { FaDeleteLeft, FaSchool } from "react-icons/fa6";
 import { useState,useEffect } from "react";
-import { FaEdit, FaPlug, FaPlus, FaRegRegistered, FaRegTimesCircle } from "react-icons/fa";
+import { FaEdit, FaHome, FaPlug, FaPlus, FaRegRegistered, FaRegTimesCircle } from "react-icons/fa";
 import { PiStudentBold } from "react-icons/pi";
 import { MdDelete, MdDriveFileRenameOutline } from "react-icons/md";
 import { MdAlternateEmail } from "react-icons/md";
@@ -14,17 +14,17 @@ import { FcDepartment } from "react-icons/fc";
 import axios from 'axios';
 import { getToken } from '../../helpers/auth';
 import { RiLockPasswordLine } from "react-icons/ri";
+import staff from './staff';
+import { GrUserWorker } from "react-icons/gr";
 
 
+const Staff = () => {
 
-const StudentTable = () => {
-
-  const [stdModalState, setStdModalState] = useState(false);
-  const [stdDeleteModalState, setStdDeleteModalState] = useState(false);
-  const [stdUpdateModalState, setStdUpdateModalState] = useState(false);
+  const [staffModalState, setStaffModalState] = useState(false);
+  const [staffUpdateModalState, setStaffUpdateModalState] = useState(false);
   const [departments, setDepartments] = useState([{ id: '', name: 'Select Department' }])
-  const [students, setStudents] = useState([])
-  const [studentRec, setStudentRec] = useState(null);
+  const [staff, setStaff] = useState([])
+  const [staffRec, setStaffRec] = useState(null);
 
   let fetchDeptData = () => {
       axios.get(`http://localhost/school-mgt/api/departments/fetch_data.php`, {
@@ -51,10 +51,10 @@ const StudentTable = () => {
   }, [])
   
 
-  let createStd = (ev) => {
+  let createStaff = (ev) => {
     ev.preventDefault();
     let data = new FormData(ev.target);
-    axios.post(`http://localhost/school-mgt/api/students/save_Stud.php`, data, {
+    axios.post(`http://localhost/school-mgt/api/staff/save_Staff.php`, data, {
       headers: {
         'Authorization': 'Bearer ' + getToken()
       }
@@ -62,8 +62,8 @@ const StudentTable = () => {
       .then((response) => {
         if (response.data.success) {
           ev.target.reset();
-          setStdModalState(false);
-          fetchStdData();
+          setStaffModalState(false);
+          fetchStaffData();
           alert(response.data.message)
         }
       })
@@ -72,10 +72,10 @@ const StudentTable = () => {
       })
   };
   
-    let deleteStd = (id) => {
+    let deleteStaff = (id) => {
       let data = new FormData();
-      data.append('student_id', id);
-      axios.post(`http://localhost/school-mgt/api/students/delete_Stud.php`, data, {
+      data.append('id', id);
+      axios.post(`http://localhost/school-mgt/api/staff/delete_Staff.php`, data, {
       headers: {
         'Authorization': 'Bearer ' + getToken(),
       }
@@ -83,7 +83,7 @@ const StudentTable = () => {
       .then((response) => {
         if (response.data.success) {
           alert(response.data.message)
-          fetchStdData();
+          fetchStaffData();
           
         }
       })
@@ -92,16 +92,16 @@ const StudentTable = () => {
       })
    
   };
-    let fetchStdData = () => {
-        axios.get(`http://localhost/school-mgt/api/students/fetch_Stud.php`, {
+    let fetchStaffData = () => {
+        axios.get(`http://localhost/school-mgt/api/staff/fetch_Staff.php`, {
             headers: {
               'Authorization': 'Bearer ' + getToken()
             }
         })
         .then((response) => {            
             if (response.data.success) {
-              setStudents(response.data.body.students)
-              // console.log(response.data.body.students);
+              setStaff(response.data.body.staff)
+              console.log(response.data.body.staff);
             }
         })
         .catch((error) => {
@@ -109,21 +109,21 @@ const StudentTable = () => {
         })
     }
     useEffect(() => {
-        fetchStdData()
+        fetchStaffData()
     }, [])
   
-  let updateStdData = (ev) => {
+  let updateStaffData = (ev) => {
       ev.preventDefault();
       let data = new FormData(ev.target);
-      axios.post(`http://localhost/school-mgt/api/students/edit_Stud.php`,data,{
+      axios.post(`http://localhost/school-mgt/api/staff/edit_Staff.php`,data,{
             headers: {
               'Authorization': 'Bearer ' + getToken()
             }
       })
      .then((response) => {
         if (response.data.success) {
-          setStdUpdateModalState(false);
-          fetchStdData();
+          setStaffUpdateModalState(false);
+          fetchStaffData();
           alert(response.data.message)
         }
       })
@@ -137,8 +137,8 @@ const StudentTable = () => {
               <div className='flex  items-start md:flex-row bg-[#f8f8f8] p-4 rounded-md  md:justify-end  justify-center md:items-center gap-4 whitespace-nowrap  '>
                   {/* <aside className='flex flex-row gap-2 shadow-2xl '>
                     <Button className="outline-none text-black  hover:text-white hover:bg-primary bg-slate-200 rounded-md ">PRINT</Button>
-                  </aside>
-                  <aside className='flex flex-row gap-4'>
+                  </aside> */}
+                  {/* <aside className='flex flex-row gap-4'>
                     <select id="" name="" className="inline-flex text-black outline-none items-center px-4 py-2 cursor-pointer font-semibold text-xs uppercase tracking-widest  focus:outline-none focus:ring-2  focus:ring-offset-2 transition ease-in-out duration-150 active:text-black rounded-md bg-slate-200 hover:bg-slate-200 ">
                       <option value="student " className="outline-none cursor-pointer text-black">EXPORT</option>
                       <option value="student " className="outline-none cursor-pointer text-black">IMPORT</option>
@@ -147,42 +147,33 @@ const StudentTable = () => {
                     </select>
                   </aside> */}
                   <aside className='flex flex-row gap-4'>
-                    <Button   className=" text-white  rounded-md bg-red-600">DELETE STUDENT</Button>
+                    
+                    <Button   className=" text-white  rounded-md bg-red-600 ">DELETE STAFF</Button>
                   </aside>
                   <aside className='flex flex-row gap-4'>
-                    <Button  onClick={()=> setStdModalState(true)} className=" text-white  rounded-md">CREATE STUDENT</Button>
+                    
+                    <Button  onClick={()=> setStaffModalState(true)} className=" text-white  rounded-md">CREATE STAFF</Button>
                   </aside>
               </div>
               
               {/* Create Student Modal */}
               <section>
-                <Modal show={stdModalState} maxWidth='sm'>
+                <Modal show={staffModalState} maxWidth='sm'>
                       <div className=''>
                               <header className='flex justify-between items-center py-2 px-4'>
                                   <div>
                                       <h1 className='flex items-center gap-2'>
-                                        <PiStudentBold /> Add Students
+                                        <GrUserWorker /> Add Staff
                                       </h1>
                                   </div>
                                   <div>
-                                      <button onClick={()=>setStdModalState(false)}  className='bg-red-500 rounded-full text-white text-xl'>
+                                      <button onClick={()=>setStaffModalState(false)}  className='bg-red-500 rounded-full text-white text-xl'>
                                           <FaRegTimesCircle />
                                       </button>
                                   </div>
                               </header>
                               <section className='py-2 px-4'>
-                                  <form onSubmit={createStd} >
-                                      <div className="mb-3">
-                                          <PrimaryTextinput
-                                              icon={<FaRegRegistered className="text-xl"/>}
-                                              placeholder="Enter Reg No"
-                                              type ="text"
-                                              name="regNo"
-                                              className='py-2'
-                                              required
-                                          />
-                                      </div>
-                                      
+                                  <form onSubmit={createStaff} >                                      
                                       <div className="mb-3">
                                           <PrimaryTextinput
                                               icon={<MdDriveFileRenameOutline className="text-xl"/>}
@@ -204,7 +195,7 @@ const StudentTable = () => {
                                               required
                                           />
                                       </div>
-
+                                      
                                       <div className="mb-3">
                                           <PrimaryTextinput
                                               icon={<MdAlternateEmail className="text-xl"/>}
@@ -216,26 +207,17 @@ const StudentTable = () => {
                                           />
                                       </div>
                                       
-                                      {/* <div className="mb-3">
+                                      <div className="mb-3">
                                           <PrimaryTextinput
-                                              icon={<RiLockPasswordLine className="text-xl"/>}
-                                              placeholder="Enter  Password"
-                                              type ="password"
-                                              name="password"
+                                              icon={<FaHome className="text-xl"/>}
+                                              placeholder="Enter home Address"
+                                              type ="text"
+                                              name="homeAddress"
                                               className='py-2'
                                               required
                                           />
-                                      </div> */}
-                                      
-                                      {/* <div className="mb-3">
-                                          <SelectInput
-                                              icon={<FcDepartment className="text-xl"/>}
-                                              options="Male: Female"
-                                              name="dept_Id"
-                                              className='py-2 w-full'
-                                              required
-                                          />
-                                      </div> */}
+                                      </div>
+    
                                       <div className="mb-3">
                                           <select id="" name="gender" className="inline-flex bg-slate-50 text-black cursor-pointer ring-0 outline-none items-center px-4 py-2  font-semibold text-xs uppercase tracking-widest  focus:outline-none focus:ring-2  focus:ring-offset-2 transition ease-in-out duration-150 rounded-md  w-full ">
                                             <option value="" className="outline-none text-black">Gender</option>
@@ -258,7 +240,7 @@ const StudentTable = () => {
                                       <div className="pt-5  ">
                                       {/* <Button className=" hover:bg-blue-800 w-full border border-[#0000002f]"> Login</Button> */}
                                       <Button className="text-white h-11 w-full  justify-center outline-none rounded-md  flex items-center gap-2">
-                                          <FaPlus/>  Add Student
+                                          <FaPlus/>  Add Staff
                                       </Button>
                                       </div>
                                   </form>
@@ -266,96 +248,32 @@ const StudentTable = () => {
                           </div>
                 </Modal>
               </section>
-               {/* delete Student Modal */}
-              <section>
-                <Modal show={stdDeleteModalState} maxWidth='sm'>
-                      <div className=''>
-                              <header className='flex justify-between items-center py-2 px-4'>
-                                  <div>
-                                      <h1 className='flex items-center gap-2'>
-                                        <PiStudentBold /> Do you want to Delete Student record?
-                                      </h1>
-                                  </div>
-                                  <div>
-                                      <button onClick={()=>setStdDeleteModalState(false)}  className='bg-red-500 rounded-full text-white text-xl'>
-                                          <FaRegTimesCircle />
-                                      </button>
-                                  </div>
-                              </header>
-                               {/* {students.length >0 && students.map((student, index)=>(
-                                  <tr className='text-xs' key={student.id}>
-                                  <td className='py-3 whitespace-nowrap'><Link to=''>{index +1}</Link> </td>
-                                    <td className='py-3 whitespace-nowrap'><Link to=''>{student.regno}</Link> </td>
-                                    <td><Link to=''>{student.firstname}</Link></td>
-                                    <td><Link to=''>{student.lastname}</Link></td>
-                                    <td>{student.gender}</td>
-                                    <td className="whitespace-nowrap">{student.department?.name }</td>
-                                    <td>
-                                    <button onClick={() => { setStudentRec(student); setStdUpdateModalState(true)} }  className="flex justify-center items-center gap-1 bg-yellow-300 rounded-md px-2 py-1 hover:text-white hover:bg-yellow-500 text-black">
-                                          Edit <FaEdit className="text-lg"/>
-                                      </button>
-                                    </td>
-                                    <td>
-                                        <button onClick={() => setStdDeleteModalState(true)}  className="flex justify-center items-center gap-1 bg-red-500 rounded-md px-2 py-1 hover:text-white hover:bg-red-600 text-black">
-                                            Delete <MdDelete className="text-lg" />
-                                        </button>
-                                    </td>
-                                </tr>
-                                
-                              ))}  */}
-                              <section className='py-2 px-4 mb-5'>
-                                  <div className="flex items-center justify-center gap-6">
-                                    {/* {students.map((student)=>( key={student.id} */}
-                                    <aside  className='flex flex-row gap-4'>
-                                      <Button  onClick={() => deleteStd(students.id)}  className=" text-white  rounded-md bg-red-600">YES</Button>
-                                    </aside>
-                                    {/* ))} */}
-                                    <aside className='flex flex-row gap-4'>
-                                      <Button  onClick={()=>setStdDeleteModalState(false)}  className=" text-white  rounded-md">NO</Button>
-                                    </aside>
-                                  </div>
-                              </section>
-                          </div>
-                </Modal>
-              </section>
         {/* Edit Student Modal */}
               <section>
-                <Modal show={stdUpdateModalState} maxWidth='sm'>
+                <Modal show={staffUpdateModalState} maxWidth='sm'>
                       <div className=''>
                               <header className='flex justify-between items-center py-2 px-4'>
                                   <div>
                                       <h1 className='flex items-center gap-2'>
-                                        <FaEdit /> Edit Students Record
+                                        <FaEdit /> Edit Staff Record
                                       </h1>
                                   </div>
                                   <div>
-                                      <button onClick={()=>{ setStudentRec(null); setStdUpdateModalState(false)} }  className='bg-red-500 rounded-full text-white text-xl'>
+                                      <button onClick={()=>{ setStaffRec(null); setStaffUpdateModalState(false)} }  className='bg-red-500 rounded-full text-white text-xl'>
                                           <FaRegTimesCircle />
                                       </button>
                                   </div>
                               </header>
-                            {studentRec && <section className='py-2 px-4'>
-                              <form onSubmit={updateStdData} >
-                                <input type="hidden" name="student_id" value={studentRec.id} />
-                                <div className="mb-3">
-                                  <PrimaryTextinput
-                                    icon={<FaRegRegistered className="text-xl" />}
-                                    placeholder="Enter Reg No"
-                                    type="text"
-                                    name="regNo"
-                                    defaultValue={studentRec.regno}
-                                    className='py-2'
-                                    required
-                                  />
-                                </div>
-                                                    
+                            {staffRec && <section className='py-2 px-4'>
+                              <form onSubmit={updateStaffData} >
+                                <input type="hidden" name="id" value={staffRec.id} />                                                   
                                 <div className="mb-3">
                                   <PrimaryTextinput
                                     icon={<MdDriveFileRenameOutline className="text-xl" />}
                                     placeholder="Enter First Name"
                                     type="text"
                                     name="firstname"
-                                    defaultValue={studentRec.firstname}
+                                    defaultValue={staffRec.firstname}
                                     className='py-2'
                                     required
                                   />
@@ -367,7 +285,7 @@ const StudentTable = () => {
                                     placeholder="Enter Last Name"
                                     type="text"
                                     name="lastname"
-                                    defaultValue={studentRec.lastname}
+                                    defaultValue={staffRec.lastname}
                                     className='py-2'
                                     required
                                   />
@@ -379,35 +297,26 @@ const StudentTable = () => {
                                     placeholder="Enter  Email"
                                     type="email"
                                     name="email"
-                                    defaultValue={studentRec.email}
+                                    defaultValue={staffRec.email}
                                     className='py-2'
                                     required
                                   />
                                 </div>
-                                                    
-                                {/* <div className="mb-3">
-                                  <PrimaryTextinput
-                                    icon={<RiLockPasswordLine className="text-xl" />}
-                                    placeholder="Enter  Password"
-                                    type="password"
-                                    name="password"
-                                    defaultValue={studentRec.password}
-                                    className='py-2'
-                                  required
-                                  />
-                                </div> */}
-                                                    
-                                {/* <div className="mb-3">
-                                                        <SelectInput
-                                                            icon={<FcDepartment className="text-xl"/>}
-                                                            options="Male: Female"
-                                                            name="dept_Id"
-                                                            className='py-2 w-full'
-                                                            required
-                                                        />
-                                                    </div> */}
+                                
                                 <div className="mb-3">
-                                  <select id="" defaultValue={studentRec.gender} name="gender" className="inline-flex bg-slate-50 text-black cursor-pointer ring-0 outline-none items-center px-4 py-2  font-semibold text-xs uppercase tracking-widest  focus:outline-none focus:ring-2  focus:ring-offset-2 transition ease-in-out duration-150 rounded-md  w-full ">
+                                    <PrimaryTextinput
+                                        icon={<FaHome className="text-xl"/>}
+                                        placeholder="Enter home Address"
+                                        type ="text"
+                                        name="homeAddress"
+                                        defaultValue={staffRec.homeAddress}
+                                        className='py-2'
+                                        required
+                                    />
+                                </div>
+                                                    
+                                <div className="mb-3">
+                                  <select id="" defaultValue={staffRec.gender} name="gender" className="inline-flex bg-slate-50 text-black cursor-pointer ring-0 outline-none items-center px-4 py-2  font-semibold text-xs uppercase tracking-widest  focus:outline-none focus:ring-2  focus:ring-offset-2 transition ease-in-out duration-150 rounded-md  w-full ">
                                     <option value="" className="outline-none text-black">Gender</option>
                                     <option value="Female" className="outline-none text-black">Female</option>
                                     <option value="Male" className="outline-none text-black">Male</option>
@@ -420,9 +329,9 @@ const StudentTable = () => {
                                     options={departments}
                                     name="dept_id"
                                     className='py-2 w-full border'
-                                    defaultValue={studentRec.dept_id}
+                                    defaultValue={staffRec.dept_id}
                       
-                                  // required
+                                //   required
                                   />
                                 </div>
                                                     
@@ -430,7 +339,7 @@ const StudentTable = () => {
                                 <div className="pt-5  ">
                                   {/* <Button className=" hover:bg-blue-800 w-full border border-[#0000002f]"> Login</Button> */}
                                   <Button  className="text-white h-11 w-full  justify-center outline-none rounded-md  flex items-center gap-2">
-                                    <FaPlus />  Update Student Record
+                                    <FaPlus />  Update Staff Record
                                   </Button>
                                 </div>
                               </form>
@@ -467,9 +376,9 @@ const StudentTable = () => {
                   <div className="md:w-full">
                       <select id="" name="" className="inline-flex text-black outline-none items-center cursor-pointer px-4 py-2  font-semibold text-xs uppercase tracking-widest  focus:outline-none focus:ring-2  focus:ring-offset-2 transition ease-in-out duration-150 active:text-black rounded-md bg-slate-200  ">
                         <option value=" " className="outline-none text-black">Age Range</option>
-                        <option value="ageRange " className="outline-none text-black">18 to 24</option>
-                        <option value="ageRange " className="outline-none text-black">25 to 30</option>
-                        <option value="ageRange " className="outline-none text-black">34 to 35</option>
+                        <option value="ageRange " className="outline-none text-black">30 to 40</option>
+                        <option value="ageRange " className="outline-none text-black">41 to 50</option>
+                        <option value="ageRange " className="outline-none text-black">51 to 60</option>
                       </select>
                   </div>
                   
@@ -477,14 +386,14 @@ const StudentTable = () => {
               
               <div className='flex  items-start md:flex-row bg-[#f8f8f8] p-4 rounded-md  md:justify-start  justify-center md:items-center gap-6 whitespace-nowrap my-2 '>
                   <Link to="" className='flex flex-row gap-1 shadow-2xl justify-center items-center border-b-2 border-primary pb-[2px] '>
-                    <h1 className="text-black font-bold text-sm">ALL </h1><h6 className="font-light text-[10px] bg-slate-200 p-[2px] text-primary">43</h6>
+                    <h1 className="text-black font-bold text-sm">ALL STAFF</h1><h6 className="font-light text-[10px] bg-slate-200 p-[2px] text-primary"></h6>
                   </Link>
-                   <Link to="" className='flex flex-row gap-1 shadow-2xl justify-center items-center hover:border-b-2 hover:border-primary pb-[2px] '>
+                   {/* <Link to="" className='flex flex-row gap-1 shadow-2xl justify-center items-center hover:border-b-2 hover:border-primary pb-[2px] '>
                     <h1 className="text-slate-500 font-bold hover:text-black text-sm">PRESENT </h1><h6 className="font-light text-[10px] bg-slate-200 p-[2px] hover:text-primary">43</h6>
                   </Link>
                    <Link to="" className='flex flex-row gap-1 shadow-2xl justify-center items-center hover:border-b-2 hover:border-primary pb-[2px] '>
                     <h1 className="text-slate-500 font-bold hover:text-black text-sm">ALUMINI </h1><h6 className="font-light text-[10px] bg-slate-200 p-[2px] hover:text-primary">43</h6>
-                  </Link>
+                  </Link> */}
               </div>
               
               
@@ -494,7 +403,7 @@ const StudentTable = () => {
                   <thead className=' '>
                       <tr className='text-xs font-light  px-11 '>
                           <th className='py-3 whitespace-nowrap '>S/No</th>
-                          <th className='py-3 whitespace-nowrap '>REG No</th>
+                          {/* <th className='py-3 whitespace-nowrap '>REG No</th> */}
                           <th className='whitespace-nowrap'>FIRST NAME</th>
                           <th className='whitespace-nowrap'>LAST NAME</th>
                           <th className='whitespace-nowrap'>GENDER</th>
@@ -502,26 +411,25 @@ const StudentTable = () => {
                         </tr>
                   </thead>
                   <tbody className='my-4'>
-                    {students.length >0 && students.map((student, index)=>(
-                        <tr className='text-xs' key={student.id}>
-                        <td className='py-3 whitespace-nowrap'><Link to=''>{index +1}</Link> </td>
-                          <td className='py-3 whitespace-nowrap'><Link to=''>{student.regno}</Link> </td>
-                          <td><Link to=''>{student.firstname}</Link></td>
-                          <td><Link to=''>{student.lastname}</Link></td>
-                          <td>{student.gender}</td>
-                          <td className="whitespace-nowrap">{student.department?.name }</td>
+                    {staff.length >0 && staff.map((staf, index)=>(
+                        <tr className='text-xs' key={staf.id}>
+                          <td className='py-3 whitespace-nowrap'><Link to=''>{index +1}</Link> </td>
+                          {/* <td className='py-3 whitespace-nowrap'><Link to=''>{student.regno}</Link> </td> */}
+                          <td><Link to=''>{staf.firstname}</Link></td>
+                          <td><Link to=''>{staf.lastname}</Link></td>
+                          <td>{staf.gender}</td>
+                          <td className="whitespace-nowrap">{staf.department?.name }</td>
                           <td>
-                          <button onClick={() => { setStudentRec(student); setStdUpdateModalState(true)} }  className="flex justify-center items-center gap-1 bg-yellow-300 rounded-md px-2 py-1 hover:text-white hover:bg-yellow-500 text-black">
+                          <button onClick={() => { setStaffRec(staf); setStaffUpdateModalState(true)} }  className="flex justify-center items-center gap-1 bg-yellow-300 rounded-md px-2 py-1 hover:text-white hover:bg-yellow-500 text-black">
                                 Edit <FaEdit className="text-lg"/>
                             </button>
                           </td>
                           <td>
-                              <button onClick={() => setStdDeleteModalState(true)}  className="flex justify-center items-center gap-1 bg-red-500 rounded-md px-2 py-1 hover:text-white hover:bg-red-600 text-black">
+                              <button onClick={() => deleteStaff(staf.id)} className="flex justify-center items-center gap-1 bg-red-500 rounded-md px-2 py-1 hover:text-white hover:bg-red-600 text-black">
                                   Delete <MdDelete className="text-lg" />
                               </button>
                           </td>
-                      </tr>
-                     
+                        </tr>
                     ))}                  
                   </tbody>
                 </table>
@@ -531,4 +439,4 @@ const StudentTable = () => {
   )
 }
 
-export default StudentTable
+export default Staff
